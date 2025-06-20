@@ -1,0 +1,22 @@
+{
+    "name": "admin/emails",
+    "description": "Manage and configure email templates used across the system for various notifications and communications.",
+    "type": "library",
+    "version": "1.0.0",  
+    "license": "MIT",
+    "autoload": {
+      "psr-4": {
+        "admin\\emails\\": "src/"
+      }
+    },
+    "extra": { 
+      "laravel": {
+        "providers": [
+          "admin\\emails\\EmailTemplateServiceProvider"
+        ]
+      }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+  }
+  

@@ -1,0 +1,67 @@
+# Admin Email Template Manager
+
+This package provides an Admin Email Template Manager for managing email templates within your application.
+
+## Features
+
+- Create, edit, and delete email templates
+- Organize templates by categories or types
+- WYSIWYG editor for email content
+- Support for dynamic variables/placeholders
+- User permissions and access control
+
+## Update `composer.json`
+
+Add the following to your `composer.json` to use the package from a local path:
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/pavanraj92/admin-emails.git"
+    }
+]
+```
+
+## Installation
+
+```bash
+composer require admin/emails --dev
+```
+
+## Usage
+
+1. Publish the configuration and migration files:
+    ```bash
+    php artisan vendor:publish --tag=email-template
+    php artisan migrate
+    ```
+2. Access the Email Template Manager from your admin dashboard.
+
+## CRUD Example
+
+```php
+// Creating a new email template
+$template = new EmailTemplate();
+$template->title = 'Welcome Email';
+$template->subject = 'Welcome to Our Service';
+$template->description = '<p>Hello {{user_name}}, welcome!</p>';
+$template->save();
+
+// Updating an email template
+$template = EmailTemplate::find(1);
+$template->subject = 'Updated Subject';
+$template->save();
+
+// Deleting an email template
+$template = EmailTemplate::find(1);
+$template->delete();
+```
+
+## Customization
+
+You can customize views, routes, and permissions by editing the configuration file.
+
+## License
+
+This package is open-sourced software licensed under the [MIT license](LICENSE).

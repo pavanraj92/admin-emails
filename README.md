@@ -4,11 +4,27 @@ This package provides an Admin Email Template Manager for managing email templat
 
 ## Features
 
-- Create, edit, and delete email templates
-- Organize templates by categories or types
-- WYSIWYG editor for email content
-- Support for dynamic variables/placeholders
-- User permissions and access control
+- Create new emails
+- View a list of existing emails
+- Update email details
+- Delete emails
+
+## Usage
+
+1. **Create**: Add a new email with name and description.
+2. **Read**: View all emails in a paginated list.
+3. **Update**: Edit email information.
+4. **Delete**: Remove emails that are no longer needed.
+
+## Example Endpoints
+
+| Method | Endpoint           | Description           |
+|--------|-------------------|-----------------------|
+| GET    | `/emails`     | List all emails   |
+| POST   | `/emails`     | Create a new category |
+| GET    | `/emails/{id}`| Get category details  |
+| PUT    | `/emails/{id}`| Update a category     |
+| DELETE | `/emails/{id}`| Delete a category     |
 
 ## Update `composer.json`
 
@@ -64,4 +80,4 @@ You can customize views, routes, and permissions by editing the configuration fi
 
 ## License
 
-This package is open-sourced software licensed under the [MIT license](LICENSE).
+MIT license

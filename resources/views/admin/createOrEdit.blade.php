@@ -1,6 +1,9 @@
 @extends('admin::admin.layouts.master')
 
 @section('title', 'Emails Management')
+@section('meta_description')
+Manage email templates in the admin panel. Create or edit email title, subject, status, and content.
+@endsection
 
 @section('page-title', 'Create Email')
 

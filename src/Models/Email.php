@@ -4,6 +4,7 @@ namespace admin\emails\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class Email extends Model
 {
@@ -14,10 +15,28 @@ class Email extends Model
      */
     protected $fillable = [
         'title',
+        'slug',
         'subject',
         'description',
         'status'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($email) {
+            if (empty($email->slug)) {
+                $email->slug = Str::slug($email->title);
+            }
+        });
+
+        static::updating(function ($email) {
+            if (empty($email->slug)) {
+                $email->slug = Str::slug($email->title);
+            }
+        });
+    }
 
     public function scopeFilter($query, $title)
     {

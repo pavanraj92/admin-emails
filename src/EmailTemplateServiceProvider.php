@@ -19,9 +19,11 @@ class EmailTemplateServiceProvider extends ServiceProvider
         
 
         $this->publishes([  
-            __DIR__.'/../resources/views' => resource_path('views/vendor/email'),
-            __DIR__ . '/../resources/css/backend' => public_path('backend'),
             __DIR__ . '/../config/email.php' => config_path('constants/email.php'),
+            __DIR__.'/../resources/views' => resource_path('views/admin/email'),
+            __DIR__ . '/../src/Controllers' => app_path('Http/Controllers/Admin/EmailManager'),
+            __DIR__ . '/../src/Models' => app_path('Models/Admin/Email'),
+            __DIR__ . '/routes/web.php' => base_path('routes/admin/admin_email.php'),
         ], 'email');
 
         $this->registerAdminRoutes();

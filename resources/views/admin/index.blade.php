@@ -1,6 +1,9 @@
 @extends('admin::admin.layouts.master')
 
 @section('title', 'Emails Management')
+@section('meta_description')
+Manage Emails in the admin panel. Create or edit email title, subject, status, and content.
+@endsection
 
 @section('page-title', 'Manage Emails')
 
@@ -58,7 +61,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Title</th>
-                                        <th scope="col">Subject</th>
+                                        <th scope="col">Slug</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Created At</th>
                                         <th scope="col">Action</th>
@@ -72,8 +75,8 @@
                                         @foreach ($emails as $email)
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
-                                                <td>{{ $email->title }}</td>
-                                                <td>{{ $email->subject }}</td>
+                                                <td>{{ $email->title ?? '' }}</td>
+                                                <td>{{ $email->slug ?? '' }}</td>
                                                 <td>
                                                     <!-- create update status functionality-->
                                                     @if ($email->status == '1')
@@ -121,7 +124,7 @@
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="4" class="text-center">No emails found.</td>
+                                            <td colspan="6" class="text-center">No emails found.</td>
                                         </tr>
                                     @endif
                                 </tbody>

@@ -32,7 +32,7 @@ class Email extends Model
         });
 
         static::updating(function ($email) {
-            if (empty($email->slug)) {
+            if ($email->isDirty('title')) {
                 $email->slug = Str::slug($email->title);
             }
         });

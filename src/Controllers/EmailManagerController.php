@@ -8,7 +8,7 @@ use admin\emails\Requests\EmailCreateRequest;
 use admin\emails\Requests\EmailUpdateRequest;
 use admin\emails\Models\Email;
 
-class EmailController extends Controller
+class EmailManagerController extends Controller
 {
     public function index(Request $request)
     {

@@ -45,14 +45,12 @@ Add the following to your `composer.json` to use the package from a local path:
 composer require admin/emails --dev
 ```
 
-## Usage
+## Publish Files
 
-1. Publish the configuration and migration files:
-    ```bash
-    php artisan vendor:publish --tag=email-template
-    php artisan migrate
-    ```
-2. Access the Email Template Manager from your admin dashboard.
+After installing, publish the module's migrations, config, views, or other assets:
+
+```bash
+php artisan vendor:publish --tag=email
 
 ## CRUD Example
 

@@ -70,7 +70,7 @@ Manage email templates in the admin panel. Create or edit email title, subject, 
                         </div>
                        
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
                             <a href="{{ route('admin.emails.index') }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
@@ -164,7 +164,9 @@ Manage email templates in the admin panel. Create or edit email title, subject, 
                     if (ckEditorInstance) {
                         $('#description').val(ckEditorInstance.getData());
                     }
-
+                    
+                    const $btn = $('#saveBtn');
+                    $btn.prop('disabled', true).text('Saving...');
                     // Now submit
                     form.submit();
                 },

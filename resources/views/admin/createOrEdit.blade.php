@@ -28,7 +28,7 @@ Manage email templates in the admin panel. Create or edit email title, subject, 
                             <div class="col-md-6">                                
                                 <div class="form-group">
                                     <label>Title<span class="text-danger">*</span></label>
-                                    <input type="text" name="title" class="form-control"
+                                    <input type="text" name="title" class="form-control alphabets-only"
                                         value="{{ $email?->title ?? old('title') }}" required>
                                     @error('title')
                                         <div class="text-danger validation-error">{{ $message }}</div>
@@ -128,13 +128,22 @@ Manage email templates in the admin panel. Create or edit email title, subject, 
             // Initialize Select2 for any select elements with the class 'select2'
             $('.select2').select2();
 
+            $.validator.addMethod(
+                "alphabetsOnly",
+                function (value, element) {
+                    return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+                },
+                "Please enter letters only"
+            );
+
             //jquery validation for the form
             $('#emailForm').validate({
                 ignore: [],
                 rules: {
                     title: {
                         required: true,
-                        minlength: 3
+                        minlength: 3,
+                        alphabetsOnly: true
                     },
                     subject: {
                         required: true,

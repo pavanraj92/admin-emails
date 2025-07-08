@@ -1,9 +1,6 @@
 @extends('admin::admin.layouts.master')
 
 @section('title', 'Emails Management')
-@section('meta_description')
-Manage Emails in the admin panel. Create or edit email title, subject, status, and content.
-@endsection
 
 @section('page-title', 'Email Details')
 
@@ -26,11 +23,7 @@ Manage Emails in the admin panel. Create or edit email title, subject, status, a
                                     <tr>
                                         <th scope="row">Title</th>
                                         <td scope="col">{{ $email->title ?? 'N/A' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Slug</th>
-                                        <td scope="col">{{ $email->slug ?? 'N/A' }}</td>
-                                    </tr>
+                                    </tr>         
                                     <tr>
                                         <th scope="row">Subject</th>
                                         <td scope="col">{{ $email->subject ?? 'N/A' }}</td>
@@ -41,11 +34,13 @@ Manage Emails in the admin panel. Create or edit email title, subject, status, a
                                     </tr>
                                     <tr>
                                         <th scope="row">Status</th>
-                                        <td scope="col"> {!! config('email.constants.aryStatusLabel.' . $email->status, 'N/A') !!}</td>
+                                        <td scope="col"> {!! config('admin.constants.aryStatusLabel.' . $email->status, 'N/A') !!}</td>
                                     </tr>                                
                                     <tr>
                                         <th scope="row">Created At</th>
-                                        <td scope="col">{{ $email->created_at ?? 'N/A' }}</td>
+                                        <td scope="col">{{ $email->created_at
+                                            ? $email->created_at->format(config('GET.admin_date_time_format') ?? 'Y-m-d H:i:s')
+                                            : '—' }}</td>
                                     </tr>                                
                                 </tbody>
                             </table>   

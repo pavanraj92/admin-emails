@@ -18,9 +18,9 @@ This package provides an Admin Email Template Manager for managing email templat
 
 ## Example Endpoints
 
-| Method | Endpoint           | Description           |
-|--------|-------------------|-----------------------|
-| GET    | `/emails`     | List all emails   |
+| Method | Endpoint      | Description           |
+|--------|---------------|-----------------------|
+| GET    | `/emails`     | List all emails       |
 | POST   | `/emails`     | Create a new category |
 | GET    | `/emails/{id}`| Get category details  |
 | PUT    | `/emails/{id}`| Update a category     |
@@ -66,15 +66,6 @@ $template->title = 'Welcome Email';
 $template->subject = 'Welcome to Our Service';
 $template->description = '<p>Hello {{user_name}}, welcome!</p>';
 $template->save();
-
-// Updating an email template
-$template = EmailTemplate::find(1);
-$template->subject = 'Updated Subject';
-$template->save();
-
-// Deleting an email template
-$template = EmailTemplate::find(1);
-$template->delete();
 ```
 
 ## Customization
@@ -83,4 +74,4 @@ You can customize views, routes, and permissions by editing the configuration fi
 
 ## License
 
-This package is open-sourced software licensed under the [MIT license](LICENSE).
+This package is open-sourced software licensed under the Dotsquares.write code in the readme.md file regarding to the admin/email manager

@@ -41,9 +41,6 @@ class EmailTemplateServiceProvider extends ServiceProvider
        
         $this->registerAdminRoutes();
 
-        if ($this->app->runningInConsole()) {
-            $this->publishWithNamespaceTransformation();
-        }
     }
 
     protected function registerAdminRoutes()

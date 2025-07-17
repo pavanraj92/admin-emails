@@ -1,16 +1,14 @@
 @extends('admin::admin.layouts.master')
 
 @section('title', 'Emails Management')
-@section('meta_description')
-Manage email templates in the admin panel. Create or edit email title, subject, status, and content.
-@endsection
 
-@section('page-title', 'Create Email')
+@section('page-title', isset($email) ? 'Edit Email' : 'Create Email')
 
 @section('breadcrumb')
     <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Manage Emails</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Create Email</li>
+    <li class="breadcrumb-item active" aria-current="page">{{isset($email) ? 'Edit Email' : 'Create Email'}}</li>
 @endsection
+
 
 @section('content')
     <div class="container-fluid">

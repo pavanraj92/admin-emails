@@ -18,6 +18,8 @@ class EmailTemplateServiceProvider extends ServiceProvider
             resource_path('views/admin/email'), // Published views second
             __DIR__ . '/../resources/views'      // Package views as fallback
         ], 'email');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/email.php', 'email.constants');
         
         // Also register module views with a specific namespace for explicit usage
         if (is_dir(base_path('Modules/Emails/resources/views'))) {

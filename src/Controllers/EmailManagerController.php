@@ -25,6 +25,7 @@ class EmailManagerController extends Controller
         try {
             $emails = Email::filter($request->query('keyword'))
                 ->filterByStatus($request->query('status'))
+                ->sortable()
                 ->latest()
                 ->paginate(Email::getPerPageLimit())
                 ->withQueryString();

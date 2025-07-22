@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('title',100)->nullable();
+            $table->string('slug',100)->nullable();
             $table->string('subject')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('status')->nullable()->default(true);
+            $table->boolean('status')->nullable()->default(true)->comment('0 = Inactive, 1 = Active');
             $table->timestamps();
         });
     }

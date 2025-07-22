@@ -5,7 +5,7 @@
 @section('page-title', isset($email) ? 'Edit Email' : 'Create Email')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Manage Emails</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Email Template Manager</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{isset($email) ? 'Edit Email' : 'Create Email'}}</li>
 @endsection
 
@@ -68,7 +68,7 @@
                         </div>
                        
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+                            <button type="submit" class="btn btn-primary" id="saveBtn">{{isset($email) ? 'Update' : 'Save'}}</button>
                             <a href="{{ route('admin.emails.index') }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
@@ -173,7 +173,11 @@
                     }
                     
                     const $btn = $('#saveBtn');
-                    $btn.prop('disabled', true).text('Saving...');
+                    if ($btn.text().trim().toLowerCase() === 'update') {
+                        $btn.prop('disabled', true).text('Updating...');
+                    } else {
+                        $btn.prop('disabled', true).text('Saving...');
+                    }
                     // Now submit
                     form.submit();
                 },

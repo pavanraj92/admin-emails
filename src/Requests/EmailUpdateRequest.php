@@ -12,7 +12,7 @@ class EmailUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [          
-            'title' => 'required|string|min:3|max:255|unique:emails,title,' . $this->route('email')->id,            
+            'title' => 'required|string|min:3|max:100|unique:emails,title,' . $this->route('email')->id,            
             'subject' => 'nullable|string|max:255',
             'description' => 'required|string|min:3|max:65535',
             'status' => 'required|in:0,1',

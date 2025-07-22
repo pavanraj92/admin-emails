@@ -5,7 +5,7 @@
 @section('page-title', 'Email Details')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Manage Emails</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Email Template Manager</a></li>
     <li class="breadcrumb-item active" aria-current="page">Email Details</li>
 @endsection
 
@@ -34,7 +34,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Status</th>
-                                        <td scope="col"> {!! config('admin.constants.aryStatusLabel.' . $email->status, 'N/A') !!}</td>
+                                        <td scope="col"> {!! config('email.constants.aryStatusLabel.' . $email->status, 'N/A') !!}</td>
                                     </tr>                                
                                     <tr>
                                         <th scope="row">Created At</th>

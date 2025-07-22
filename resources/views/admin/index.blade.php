@@ -2,10 +2,10 @@
 
 @section('title', 'Emails Management')
 
-@section('page-title', 'Manage Emails')
+@section('page-title', 'Email Template Manager')
 
 @section('breadcrumb')
-<li class="breadcrumb-item active" aria-current="page">Manage Emails</li>
+<li class="breadcrumb-item active" aria-current="page">Email Template Manager</li>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" name="keyword" id="keyword" class="form-control"
-                                    value="{{ app('request')->query('keyword') }}" placeholder="Enter title">
+                                    value="{{ app('request')->query('keyword') }}" placeholder="Enter title">                                   
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -32,14 +32,17 @@
                                     <option value="">All</option>
                                     <option value="0" {{ app('request')->query('status') == '0' ? 'selected' : '' }}>Inactive</option>
                                     <option value="1" {{ app('request')->query('status') == '1' ? 'selected' : '' }}>Active</option>
-                                </select>
+                                </select>                                   
                             </div>
                         </div>
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" form="filterForm" class="btn btn-primary mb-3">Filter</button>
-                        <a href="{{ route('admin.emails.index') }}" class="btn btn-secondary mb-3">Reset</a>
-                    </div>
+                        <div class="col-auto mt-1 text-right">
+                            <div class="form-group">
+                                <label for="created_at">&nbsp;</label>
+                                <button type="submit" form="filterForm" class="btn btn-primary mt-4">Filter</button>
+                                <a href="{{ route('admin.emails.index') }}" class="btn btn-secondary mt-4">Reset</a>
+                            </div>
+                        </div>
+                    </div>                      
                 </form>
             </div>
         </div>
@@ -58,11 +61,11 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Created At</th>
+                                    <th scope="col">S. No.</th>
+                                    <th scope="col">@sortablelink('title', 'Title', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('subject', 'Subject', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('status', 'Status', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('created_at', 'Created At', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -98,30 +101,30 @@
                                                         ? $email->created_at->format(config('GET.admin_date_time_format') ?? 'Y-m-d H:i:s')
                                                         : '—' }}
                                     </td>
-                                    <td>
+                                    <td style="width: 10%;">
+                                        @admincan('emails_manager_view')
+                                        <a href="{{ route('admin.emails.show', $email) }}" 
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="View this record"
+                                            class="btn btn-warning btn-sm"><i class="mdi mdi-eye"></i></a>
+                                        @endadmincan
                                         @admincan('emails_manager_edit')
                                         <a href="{{ route('admin.emails.edit', $email) }}"
                                             data-toggle="tooltip"
                                             data-placement="top"
                                             title="Edit this record"
                                             class="btn btn-success btn-sm"><i class="mdi mdi-pencil"></i></a>
-                                        @endadmincan
-                                        @admincan('emails_manager_view')
-                                        <a href="{{ route('admin.emails.show', $email) }}"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            title="View this record"
-                                            class="btn btn-warning btn-sm"><i class="mdi mdi-eye"></i></a>
-                                        @endadmincan
+                                        @endadmincan                                                 
                                         @admincan('emails_manager_delete')
-                                        <a href="javascript:void(0)"
-                                            data-toggle="tooltip"
+                                        <a href="javascript:void(0)" 
+                                            data-toggle="tooltip" 
                                             data-placement="top"
-                                            title="Delete this record"
+                                            title="Delete this record" 
                                             data-url="{{ route('admin.emails.destroy', $email) }}"
-                                            data-text="Are you sure you want to delete this record?"
+                                            data-text="Are you sure you want to delete this record?"                                                    
                                             data-method="DELETE"
-                                            class="btn btn-danger btn-sm delete-record"><i class="mdi mdi-delete"></i></a>
+                                            class="btn btn-danger btn-sm delete-record" ><i class="mdi mdi-delete"></i></a>
                                         @endadmincan
                                     </td>
                                 </tr>
@@ -131,7 +134,7 @@
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="4" class="text-center">No emails found.</td>
+                                    <td colspan="6" class="text-center">No records found.</td>
                                 </tr>
                                 @endif
                             </tbody>

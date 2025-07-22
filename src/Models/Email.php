@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
+use Kyslik\ColumnSortable\Sortable;
 
 class Email extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,16 @@ class Email extends Model
         'subject',
         'description',
         'status'
+    ];
+
+    /**
+     * The attributes that should be sortable.
+     */
+    public $sortable = [
+        'title',
+        'subject',
+        'status',
+        'created_at',
     ];
 
     protected static function boot()

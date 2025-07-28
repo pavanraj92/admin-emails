@@ -2,12 +2,47 @@
 
 This package provides an Admin Email Template Manager for managing email templates within your application.
 
+---
+
 ## Features
 
 - Create new emails
 - View a list of existing emails
 - Update email details
 - Delete emails
+
+---
+
+## Requirements
+
+- PHP >=8.2
+- Laravel Framework >= 12.x
+
+---
+
+## Installation
+
+### 1. Add Git Repository to `composer.json`
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/pavanraj92/admin-emails.git"
+    }
+]
+```
+
+### 2. Require the package via Composer
+```bash
+composer require admin/emails --dev
+```
+
+### 3. Publish assets
+    ```bash
+    php artisan email:publish --force
+    ```
+---
 
 ## Usage
 
@@ -26,52 +61,23 @@ This package provides an Admin Email Template Manager for managing email templat
 | PUT    | `/emails/{id}`| Update a category     |
 | DELETE | `/emails/{id}`| Delete a category     |
 
-## Update `composer.json`
+---
 
-Add the following to your `composer.json` to use the package from a local path:
+## Protecting Admin Routes
 
-```json
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/pavanraj92/admin-emails.git"
-    }
-]
-```
-
-## Installation
-
-```bash
-composer require admin/emails --dev
-```
-
-## Usage
-
-1. Publish the configuration and migration files:
-    ```bash
-    php artisan email:publish --force
-
-    composer dump-autoload
-    
-    php artisan migrate
-    ```
-2. Access the Email manager from your admin dashboard.
-
-## CRUD Example
+Protect your routes using the provided middleware:
 
 ```php
-// Creating a new email template
-$template = new EmailTemplate();
-$template->title = 'Welcome Email';
-$template->subject = 'Welcome to Our Service';
-$template->description = '<p>Hello {{user_name}}, welcome!</p>';
-$template->save();
+Route::middleware(['web','admin.auth'])->group(function () {
+    // Admin emails routes here
+});
 ```
+---
+## Database Tables
 
-## Customization
-
-You can customize views, routes, and permissions by editing the configuration file.
+- `emails` - Stores email information
+---
 
 ## License
 
-This package is open-sourced software licensed under the Dotsquares.write code in the readme.md file regarding to the admin/email manager
+This package is open-sourced software licensed under the MIT license.

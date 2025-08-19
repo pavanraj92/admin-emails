@@ -5,8 +5,9 @@
 @section('page-title', isset($email) ? 'Edit Email' : 'Create Email')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Email Template Manager</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{isset($email) ? 'Edit Email' : 'Create Email'}}</li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.emails.index') }}">Email Template
+            Manager</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ isset($email) ? 'Edit Email' : 'Create Email' }}</li>
 @endsection
 
 
@@ -16,14 +17,15 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-body">
-                    <form action="{{ isset($email) ? route('admin.emails.update', $email->id) : route('admin.emails.store') }}"
+                    <form
+                        action="{{ isset($email) ? route('admin.emails.update', $email->id) : route('admin.emails.store') }}"
                         method="POST" id="emailForm">
                         @if (isset($email))
                             @method('PUT')
                         @endif
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">                                
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Title<span class="text-danger">*</span></label>
                                     <input type="text" name="title" class="form-control alphabets-only"
@@ -33,26 +35,28 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">                                
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Status<span class="text-danger">*</span></label>
+                                    <select name="status" class="form-control select2" required>
+                                        @foreach (config('email.constants.status', []) as $key => $label)
+                                            <option value="{{ $key }}"
+                                                {{ (isset($email) && (string) $email?->status === (string) $key) || old('status') === (string) $key ? 'selected' : '' }}>
+                                                {{ $label }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('status')
+                                        <div class="text-danger validation-error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Subject<span class="text-danger">*</span></label>
                                     <input type="text" name="subject" class="form-control"
                                         value="{{ $email?->subject ?? old('subject') }}" required>
                                     @error('subject')
-                                        <div class="text-danger validation-error">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Status<span class="text-danger">*</span></label>
-                                    <select name="status" class="form-control select2" required>
-                                        <option value="0" {{ (($page?->status ?? old('status')) == '0') ? 'selected' : '' }}>InActive</option>
-                                        <option value="1" {{ (($page?->status ?? old('status')) == '1') ? 'selected' : '' }}>Active</option>
-                                    </select>
-                                    @error('status')
                                         <div class="text-danger validation-error">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -66,9 +70,10 @@
                                 <div class="text-danger validation-error">{{ $message }}</div>
                             @enderror
                         </div>
-                       
+
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="saveBtn">{{isset($email) ? 'Update' : 'Save'}}</button>
+                            <button type="submit" class="btn btn-primary"
+                                id="saveBtn">{{ isset($email) ? 'Update' : 'Save' }}</button>
                             <a href="{{ route('admin.emails.index') }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
@@ -84,7 +89,7 @@
     <!-- Select2 CSS & JS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Custom CSS for the email -->
-    <link rel="stylesheet" href="{{ asset('backend/custom.css') }}">           
+    <link rel="stylesheet" href="{{ asset('backend/custom.css') }}">
 @endpush
 
 @push('scripts')
@@ -97,28 +102,28 @@
 
     <!-- Initialize CKEditor -->
     <script>
-    let ckEditorInstance;
+        let ckEditorInstance;
 
-    ClassicEditor
-    .create(document.querySelector('#description'))
-    .then(editor => {
-        ckEditorInstance = editor;
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .then(editor => {
+                ckEditorInstance = editor;
 
-        // optional styling
-        editor.ui.view.editable.element.style.minHeight = '250px';
-        editor.ui.view.editable.element.style.maxHeight = '250px';
-        editor.ui.view.editable.element.style.overflowY = 'auto';
+                // optional styling
+                editor.ui.view.editable.element.style.minHeight = '250px';
+                editor.ui.view.editable.element.style.maxHeight = '250px';
+                editor.ui.view.editable.element.style.overflowY = 'auto';
 
-        // 🔥 Trigger validation on typing
-        editor.model.document.on('change:data', () => {
-            const descriptionVal = editor.getData();
-            $('#description').val(descriptionVal); // keep textarea updated
-            $('#description').trigger('keyup'); // trigger validation manually
-        });
-    })
-    .catch(error => {
-        console.error(error);
-    });
+                // 🔥 Trigger validation on typing
+                editor.model.document.on('change:data', () => {
+                    const descriptionVal = editor.getData();
+                    $('#description').val(descriptionVal); // keep textarea updated
+                    $('#description').trigger('keyup'); // trigger validation manually
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script>
@@ -128,7 +133,7 @@
 
             $.validator.addMethod(
                 "alphabetsOnly",
-                function (value, element) {
+                function(value, element) {
                     return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
                 },
                 "Please enter letters only"
@@ -158,8 +163,8 @@
                         minlength: "Title must be at least 3 characters long"
                     },
                     subject: {
-                       required: "Please enter a subject",
-                       minlength: "Subject must be at least 3 characters long"
+                        required: "Please enter a subject",
+                        minlength: "Subject must be at least 3 characters long"
                     },
                     description: {
                         required: "Please enter description",
@@ -171,7 +176,7 @@
                     if (ckEditorInstance) {
                         $('#description').val(ckEditorInstance.getData());
                     }
-                    
+
                     const $btn = $('#saveBtn');
                     if ($btn.text().trim().toLowerCase() === 'update') {
                         $btn.prop('disabled', true).text('Updating...');

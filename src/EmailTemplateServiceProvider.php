@@ -31,6 +31,11 @@ class EmailTemplateServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(base_path('Modules/Emails/database/migrations'));
         }
 
+        // Also merge config from published module if it exists
+        if (file_exists(base_path('Modules/Emails/config/emails.php'))) {
+            $this->mergeConfigFrom(base_path('Modules/Emails/config/emails.php'), 'email.constants');
+        }
+
         // Only publish automatically during package installation, not on every request
         // Use 'php artisan emails:publish' command for manual publishing
         // $this->publishWithNamespaceTransformation();

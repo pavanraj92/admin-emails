@@ -40,7 +40,7 @@ composer require admin/emails --dev
 
 ### 3. Publish assets
     ```bash
-    php artisan email:publish --force
+    php artisan emails:publish --force
     ```
 ---
 

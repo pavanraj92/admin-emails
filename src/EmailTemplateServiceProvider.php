@@ -42,6 +42,7 @@ class EmailTemplateServiceProvider extends ServiceProvider
         
         // Standard publishing for non-PHP files
         $this->publishes([
+            __DIR__ . '/../config/' => base_path('Modules/Emails/config/'),
             __DIR__ . '/../database/migrations' => base_path('Modules/Emails/database/migrations'),
             __DIR__ . '/../resources/views' => base_path('Modules/Emails/resources/views/'),
         ], 'email');

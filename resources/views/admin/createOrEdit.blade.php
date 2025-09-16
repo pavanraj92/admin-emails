@@ -94,9 +94,14 @@
                     // ✨ Add "code view" toggle button
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
                     ['insert', ['link', 'picture']],
-                    ['view', ['codeview']] // ✅ source code button
+                    ['view', ['codeview']],
+                    ['undo', ['undo', 'redo']]
                 ],
                 callbacks: {
                     onChange: function(contents, $editable) {
